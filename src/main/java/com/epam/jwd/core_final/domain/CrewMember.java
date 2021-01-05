@@ -24,8 +24,6 @@ public class CrewMember extends AbstractBaseEntity {
         name = "Unknown crew member";
     }
 
-    public CrewMember() {}
-
     public CrewMember(int roleId, String name, int rankId) {
         this.role = Role.resolveRoleById(roleId);
         this.rank = Rank.resolveRankById(rankId);

@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public final class PropertyReaderUtil {
 
-    private static final Properties properties = new Properties();
+    private static final Properties INSTANCE = new Properties();
 
     private PropertyReaderUtil() {
     }

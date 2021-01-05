@@ -33,10 +33,7 @@ public class FlightMission extends AbstractBaseEntity {
     {
         id = ++totalNumberOfFlightMissions;
         missionResult = MissionResult.PLANNED;
-        name = "Private mission";
     }
-
-    public FlightMission() {}
 
     public FlightMission(String missionName, LocalDate startDate, LocalDate endDate, Long distance,
                          Spaceship assignedSpaceship, List<CrewMember> assignedCrew) {
