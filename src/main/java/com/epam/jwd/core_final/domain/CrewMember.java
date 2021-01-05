@@ -10,6 +10,8 @@ package com.epam.jwd.core_final.domain;
 public class CrewMember extends AbstractBaseEntity {
 
     private static Long totalNumberOfCrewMembers = 0L;
+    private final Long id;
+    private String name;
     private Role role;
     private Rank rank;
     private boolean isReadyForNextMission;
@@ -17,12 +19,26 @@ public class CrewMember extends AbstractBaseEntity {
     {
         id = ++totalNumberOfCrewMembers;
         isReadyForNextMission = true;
+        name = "Unknown crew member";
     }
 
+    public CrewMember() {}
 
-    public CrewMember(int id, String name, int rank) {
-        this.role = Role.resolveRoleById(id);
+    public CrewMember(int roleId, String name, int rankId) {
+        this.role = Role.resolveRoleById(roleId);
+        this.rank = Rank.resolveRankById(rankId);
         this.name = name;
+
     }
-    // todo
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+// todo
 }
