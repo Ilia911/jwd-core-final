@@ -7,11 +7,17 @@ import java.util.function.Supplier;
 
 public interface Application {
 
-    static ApplicationMenu start() throws InvalidStateException {
-        final Supplier<ApplicationContext> applicationContextSupplier = null; // todo
-        final NassaContext nassaContext = new NassaContext();
+    static void start() throws InvalidStateException {
 
+        final ApplicationContext nassaContext = NassaContext.INSTANCE;
         nassaContext.init();
-        return applicationContextSupplier::get;
+
+        final Supplier<ApplicationMenu> applicationMenuSupplier = () -> (ApplicationMenu) () -> nassaContext;
+        // todo
+
+        applicationMenuSupplier.get().printAvailableOptions();
+
+        //applicationMenuSupplier.get().handleUserInput();
+
     }
 }
