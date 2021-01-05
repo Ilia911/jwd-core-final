@@ -24,7 +24,11 @@ public enum Role implements BaseEntity {
      */
     @Override
     public String getName() {
-        return this.toString();
+        return this.name();
+        // but in java documentation:
+        // Most programmers should use the toString method in preference to this one,
+        // as the toString method may return a more user-friendly name.
+        //return this.toString();
     }
 
     /**
