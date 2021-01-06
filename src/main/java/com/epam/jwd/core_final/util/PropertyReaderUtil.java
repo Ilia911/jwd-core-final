@@ -2,14 +2,15 @@ package com.epam.jwd.core_final.util;
 
 import com.epam.jwd.core_final.domain.ApplicationProperties;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Properties;
 
 public final class PropertyReaderUtil {
 
-    private static final Properties INSTANCE = new Properties();
-
-    private PropertyReaderUtil() {
-    }
+    private static Properties properties = new Properties();
 
     /**
      * try-with-resource using FileInputStream
@@ -19,8 +20,16 @@ public final class PropertyReaderUtil {
      * as a result - you should populate {@link ApplicationProperties} with corresponding
      * values from property file
      */
-    public static void loadProperties() {
-        final String propertiesFileName = "resource/application.properties";
+    public static void loadProperties() throws IOException {
 
+        final String propertiesFileName = "src/main/resources/application.properties";
+
+        try (FileInputStream inputStream = new FileInputStream(new File(propertiesFileName))) {
+            properties.load(inputStream);
+        }
+    }
+
+    public static Properties getProperties() {
+        return properties;
     }
 }
