@@ -84,5 +84,51 @@ public final class ApplicationProperties {
     public String getDateTimeFormat() {
         return dateTimeFormat;
     }
-//todo
+
+    @Override
+    public String toString() {
+        return "ApplicationProperties{" +
+                "inputRootDir='" + inputRootDir + '\'' +
+                ", outputRootDir='" + outputRootDir + '\'' +
+                ", crewFileName='" + crewFileName + '\'' +
+                ", missionsFileName='" + missionsFileName + '\'' +
+                ", spaceshipsFileName='" + spaceshipsFileName + '\'' +
+                ", fileRefreshRate=" + fileRefreshRate +
+                ", dateTimeFormat='" + dateTimeFormat + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ApplicationProperties)) return false;
+
+        ApplicationProperties that = (ApplicationProperties) o;
+
+        if (inputRootDir != null ? !inputRootDir.equals(that.inputRootDir) : that.inputRootDir != null) return false;
+        if (outputRootDir != null ? !outputRootDir.equals(that.outputRootDir) : that.outputRootDir != null)
+            return false;
+        if (crewFileName != null ? !crewFileName.equals(that.crewFileName) : that.crewFileName != null) return false;
+        if (missionsFileName != null ? !missionsFileName.equals(that.missionsFileName) : that.missionsFileName != null)
+            return false;
+        if (spaceshipsFileName != null ? !spaceshipsFileName.equals(that.spaceshipsFileName) : that.spaceshipsFileName != null)
+            return false;
+        if (fileRefreshRate != null ? !fileRefreshRate.equals(that.fileRefreshRate) : that.fileRefreshRate != null)
+            return false;
+        return dateTimeFormat != null ? dateTimeFormat.equals(that.dateTimeFormat) : that.dateTimeFormat == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = inputRootDir != null ? inputRootDir.hashCode() : 0;
+        result = 31 * result + (outputRootDir != null ? outputRootDir.hashCode() : 0);
+        result = 31 * result + (crewFileName != null ? crewFileName.hashCode() : 0);
+        result = 31 * result + (missionsFileName != null ? missionsFileName.hashCode() : 0);
+        result = 31 * result + (spaceshipsFileName != null ? spaceshipsFileName.hashCode() : 0);
+        result = 31 * result + (fileRefreshRate != null ? fileRefreshRate.hashCode() : 0);
+        result = 31 * result + (dateTimeFormat != null ? dateTimeFormat.hashCode() : 0);
+        return result;
+    }
+
+    //todo
 }
