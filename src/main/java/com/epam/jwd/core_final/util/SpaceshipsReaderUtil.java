@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class SpaceshipsReaderUtil {
+public final class SpaceshipsReaderUtil {
 
     public static Collection<Spaceship> initSpaceships() throws InvalidStateException {
         ApplicationProperties applicationProperties = ApplicationProperties.getInstance();

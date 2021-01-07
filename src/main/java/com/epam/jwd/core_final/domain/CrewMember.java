@@ -41,6 +41,10 @@ public class CrewMember extends AbstractBaseEntity {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Role getRole() {
         return role;
     }
