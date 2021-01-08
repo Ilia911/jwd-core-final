@@ -26,5 +26,5 @@ public interface CrewService {
 
     // todo create custom exception for case, when crewMember is not able to be created (for example - duplicate.
     // crewmember unique criteria - only name!
-    CrewMember createCrewMember(CrewMember spaceship) throws RuntimeException;
+    CrewMember addCrewMember(CrewMember spaceship) throws RuntimeException;
 }

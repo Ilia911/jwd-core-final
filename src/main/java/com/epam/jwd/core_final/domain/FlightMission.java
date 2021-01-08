@@ -17,7 +17,8 @@ import java.util.List;
  */
 public class FlightMission extends AbstractBaseEntity {
 
-    private static Long totalNumberOfFlightMissions;
+    private static Long totalNumberOfFlightMissions = 0L;
+
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -27,9 +28,6 @@ public class FlightMission extends AbstractBaseEntity {
     private MissionResult missionResult;
     private final Long id;
 
-    static {
-        totalNumberOfFlightMissions = 0L;
-    }
     {
         id = ++totalNumberOfFlightMissions;
         missionResult = MissionResult.PLANNED;
