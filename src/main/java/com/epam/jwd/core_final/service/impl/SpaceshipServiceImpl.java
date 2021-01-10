@@ -32,8 +32,8 @@ public class SpaceshipServiceImpl implements SpaceshipService {
                 filter(spaceship -> criteria.getMaxId() == null || spaceship.getId() <= criteria.getMaxId()).
                 filter(spaceship -> criteria.getPartName() == null || spaceship.getName().toLowerCase().
                         contains(criteria.getPartName().toLowerCase())).
-                filter(spaceship -> criteria.getFlightDistance() == null ||
-                        spaceship.getFlightDistance().equals(criteria.getFlightDistance())).
+                filter(spaceship -> criteria.getMinFlightDistance() == null ||
+                        spaceship.getFlightDistance().equals(criteria.getMinFlightDistance())).
                 filter(spaceship -> criteria.isReadyForNextMission() == null ||
                         spaceship.isReadyForNextMission() == criteria.isReadyForNextMission()).
                 filter(spaceship -> criteria.getQuantityOfCrewMembers() == null ||
@@ -49,8 +49,8 @@ public class SpaceshipServiceImpl implements SpaceshipService {
                 filter(spaceship -> criteria.getMaxId() == null || spaceship.getId() <= criteria.getMaxId()).
                 filter(spaceship -> criteria.getPartName() == null || spaceship.getName().toLowerCase().
                         contains(criteria.getPartName().toLowerCase())).
-                filter(spaceship -> criteria.getFlightDistance() == null ||
-                        spaceship.getFlightDistance().equals(criteria.getFlightDistance())).
+                filter(spaceship -> criteria.getMinFlightDistance() == null ||
+                        spaceship.getFlightDistance().equals(criteria.getMinFlightDistance())).
                 filter(spaceship -> criteria.isReadyForNextMission() == null ||
                         spaceship.isReadyForNextMission() == criteria.isReadyForNextMission()).
                 filter(spaceship -> criteria.getQuantityOfCrewMembers() == null ||

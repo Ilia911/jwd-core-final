@@ -1,8 +1,7 @@
 package com.epam.jwd.core_final.domain;
 
-import com.epam.jwd.core_final.exception.InputException;
 import com.epam.jwd.core_final.exception.InvalidStateException;
-import com.epam.jwd.core_final.util.PropertyReaderUtil;
+import com.epam.jwd.core_final.util.reader.PropertyReaderUtil;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -49,7 +48,7 @@ public final class ApplicationProperties {
             try {
                 PropertyReaderUtil.loadProperties();
             } catch (IOException e) {
-                throw new InvalidStateException("Invalid properties file name!");
+                throw new InvalidStateException("Invalid properties file name or input stream failed!");
             }
             properties = PropertyReaderUtil.getProperties();
             instance = new ApplicationProperties();

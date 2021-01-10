@@ -7,37 +7,27 @@ import com.epam.jwd.core_final.domain.Spaceship;
  */
 public class SpaceshipCriteria extends Criteria<Spaceship> {
 
-    private Long minId;
-    private Long maxId;
-    private String partName;
-    private Long flightDistance;
-    private Boolean isReadyForNextMission;
-    private Integer quantityOfCrewMembers;
+    private final Long minId;
+    private final Long maxId;
+    private final String partName;
+    private final Long minFlightDistance;
+    private final Long maxFlightDistance;
+    private final Boolean isReadyForNextMission;
+    private final Integer quantityOfCrewMembers;
 
-    private SpaceshipCriteria(Long minId, Long maxId, String partName, Long flightDistance,
-                              Boolean isReadyForNextMission, Integer quantityOfCrewMembers) {
+    private SpaceshipCriteria(Long minId, Long maxId, String partName, Long minFlightDistance,
+                              Long maxFlightDistance, Boolean isReadyForNextMission, Integer quantityOfCrewMembers) {
         this.minId = minId;
         this.maxId = maxId;
         this.partName = partName;
-        this.flightDistance = flightDistance;
+        this.minFlightDistance = minFlightDistance;
+        this.maxFlightDistance = maxFlightDistance;
         this.isReadyForNextMission = isReadyForNextMission;
         this.quantityOfCrewMembers = quantityOfCrewMembers;
     }
 
     public static Builder builder() {
         return new Builder();
-    }
-
-    @Override
-    public String toString() {
-        return "SpaceshipCriteria{" +
-                "minId=" + minId +
-                ", maxId=" + maxId +
-                ", partName='" + partName + '\'' +
-                ", flightDistance=" + flightDistance +
-                ", isReadyForNextMission=" + isReadyForNextMission +
-                ", quantityOfCrewMembers=" + quantityOfCrewMembers +
-                '}';
     }
 
     public Long getMinId() {
@@ -52,8 +42,8 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
         return partName;
     }
 
-    public Long getFlightDistance() {
-        return flightDistance;
+    public Long getMinFlightDistance() {
+        return minFlightDistance;
     }
 
     public Boolean isReadyForNextMission() {
@@ -68,7 +58,8 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
         private Long minId;
         private Long maxId;
         private String partName;
-        private Long flightDistance;
+        private Long minFlightDistance;
+        private Long maxFlightDistance;
         private Boolean isReadyForNextMission;
         private Integer quantityOfCrewMembers;
 
@@ -87,8 +78,13 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
             return this;
         }
 
-        public Builder setFlightDistance(Long flightDistance) {
-            this.flightDistance = flightDistance;
+        public Builder setMinFlightDistance(Long minFlightDistance) {
+            this.minFlightDistance = minFlightDistance;
+            return this;
+        }
+
+        public Builder setMaxFlightDistance(Long maxFlightDistance) {
+            this.maxFlightDistance = maxFlightDistance;
             return this;
         }
 
@@ -106,7 +102,8 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
             return new SpaceshipCriteria(this.minId,
                     this.maxId,
                     this.partName,
-                    this.flightDistance,
+                    this.minFlightDistance,
+                    this.maxFlightDistance,
                     this.isReadyForNextMission,
                     this.quantityOfCrewMembers);
         }

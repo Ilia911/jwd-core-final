@@ -9,12 +9,12 @@ import com.epam.jwd.core_final.domain.Role;
  */
 public class CrewMemberCriteria extends Criteria<CrewMember> {
 
-    private Long minId;
-    private Long maxId;
-    private String partName;
-    private Role role;
-    private Rank rank;
-    private Boolean isReadyForNextMission;
+    private final Long minId;
+    private final Long maxId;
+    private final String partName;
+    private final Role role;
+    private final Rank rank;
+    private final Boolean isReadyForNextMission;
 
     private CrewMemberCriteria(Long minId, Long maxId, String partName, Role role, Rank rank,
                                Boolean isReadyForNextMission) {

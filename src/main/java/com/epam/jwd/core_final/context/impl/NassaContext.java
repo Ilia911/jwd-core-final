@@ -6,8 +6,10 @@ import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.InvalidStateException;
-import com.epam.jwd.core_final.util.CrewMembersReaderUtil;
-import com.epam.jwd.core_final.util.SpaceshipsReaderUtil;
+import com.epam.jwd.core_final.util.reader.CrewMembersReaderUtil;
+import com.epam.jwd.core_final.util.reader.SpaceshipsReaderUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,8 +19,9 @@ public class NassaContext implements ApplicationContext {
 
     public static final ApplicationContext INSTANCE = new NassaContext();
     // no getters/setters for them
-    private Collection<CrewMember> crewMembers;
-    private Collection<Spaceship> spaceships;
+    private static final Logger LOGGER = LoggerFactory.getLogger(NassaContext.class);
+    private Collection<CrewMember> crewMembers = new ArrayList<>();
+    private Collection<Spaceship> spaceships = new ArrayList<>();
     private Collection<FlightMission> flightMissions = new ArrayList<>();
 
     private NassaContext() {
@@ -48,12 +51,18 @@ public class NassaContext implements ApplicationContext {
      * @throws InvalidStateException
      */
     @Override
-    public void init() throws InvalidStateException {
+    public void init() {
 
-        crewMembers = CrewMembersReaderUtil.initCrewMembers();
-        spaceships = SpaceshipsReaderUtil.initSpaceships();
-//        System.out.println(crewMembers);
-//        System.out.println(spaceships);
+        try {
+            crewMembers = CrewMembersReaderUtil.initCrewMembers();
+        } catch (InvalidStateException e) {
+           LOGGER.error("Check properties file!" + e.getMessage());
+        }
+        try {
+            spaceships = SpaceshipsReaderUtil.initSpaceships();
+        } catch (InvalidStateException e) {
+            LOGGER.error("Check properties file!" + e.getMessage());
+        }
 
     }
 

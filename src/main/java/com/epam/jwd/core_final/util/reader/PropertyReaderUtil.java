@@ -1,16 +1,15 @@
-package com.epam.jwd.core_final.util;
+package com.epam.jwd.core_final.util.reader;
 
 import com.epam.jwd.core_final.domain.ApplicationProperties;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
 public final class PropertyReaderUtil {
 
-    private static Properties properties = new Properties();
+    private static final Properties properties = new Properties();
 
     /**
      * try-with-resource using FileInputStream
