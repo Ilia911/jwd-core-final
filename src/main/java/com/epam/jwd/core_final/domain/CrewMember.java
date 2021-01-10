@@ -1,7 +1,4 @@
 package com.epam.jwd.core_final.domain;
-
-import java.util.Objects;
-
 /**
  * Expected fields:
  * <p>
@@ -21,7 +18,6 @@ public class CrewMember extends AbstractBaseEntity {
     {
         id = ++totalNumberOfCrewMembers;
         isReadyForNextMission = true;
-        name = "Unknown crew member";
     }
 
     public CrewMember(int roleId, String name, int rankId) {

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Collection;
 
 public enum HandleUserSpaceshipAction {
+
     INSTANCE;
     private static final SpaceshipService spaceshipService = SpaceshipServiceImpl.INSTANCE;
     private static final Logger LOGGER = LoggerFactory.getLogger(HandleUserCrewAction.class);
@@ -23,7 +24,6 @@ public enum HandleUserSpaceshipAction {
             print(spaceshipService.findAllSpaceshipsByCriteria(spaceshipCriteria));
         }
     }
-
 
     private SpaceshipCriteria createSpaceshipCriteria(String[] args) {
         SpaceshipCriteria.Builder builder = SpaceshipCriteria.builder();
@@ -52,6 +52,7 @@ public enum HandleUserSpaceshipAction {
                     builder = builder.setReadyForNextMission(Boolean.getBoolean(temp[1]));
                     break;
                 default:
+                    LOGGER.error("fetching of flight missions failed. Incorrect user input");
                     throw new InvalidUserCommandException("Invalid user command. '-help' for list command");
             }
         }

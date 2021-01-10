@@ -37,7 +37,6 @@ public class CrewServiceImpl implements CrewService {
                 filter(crewMember -> criteria.isReadyForNextMission() == null ||
                         crewMember.isReadyForNextMission() == criteria.isReadyForNextMission()).
                 collect(Collectors.toList());
-
     }
 
     @Override
@@ -58,7 +57,7 @@ public class CrewServiceImpl implements CrewService {
     public CrewMember updateCrewMemberDetails(CrewMember newCrewMember) {
         for (CrewMember existedCrewMember : crewMembersList) {
             if (existedCrewMember.getId().equals(newCrewMember.getId())) {
-                 updateImpl(existedCrewMember, newCrewMember);
+                updateImpl(existedCrewMember, newCrewMember);
             }
         }
         return null;

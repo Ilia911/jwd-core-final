@@ -12,16 +12,16 @@ import java.time.LocalDate;
  */
 public class FlightMissionCriteria extends Criteria<FlightMission> {
 
-    private Long minId;
-    private Long maxId;
-    private String partName;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private Long minDistance;
-    private Long maxDistance;
-    private Spaceship assignedSpaceship;
-    private CrewMember assignedCrew;
-    private MissionResult missionResult;
+    private final Long minId;
+    private final Long maxId;
+    private final String partName;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+    private final Long minDistance;
+    private final Long maxDistance;
+    private final Spaceship assignedSpaceship;
+    private final CrewMember assignedCrew;
+    private final MissionResult missionResult;
 
     private FlightMissionCriteria(Long minId, Long maxId, String partName, LocalDate startDate, LocalDate endDate,
                                   Long minDistance, Long maxDistance, Spaceship assignedSpaceship,
@@ -125,13 +125,13 @@ public class FlightMissionCriteria extends Criteria<FlightMission> {
             return this;
         }
 
-        public Builder setStartDate(LocalDate startDate) {
-            this.startDate = startDate;
+        public Builder setStartDate(String[] date) {
+            this.startDate = LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
             return this;
         }
 
-        public Builder setEndDate(LocalDate endDate) {
-            this.endDate = endDate;
+        public Builder setEndDate(String[] date) {
+            this.endDate = LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
             return this;
         }
 
@@ -155,8 +155,8 @@ public class FlightMissionCriteria extends Criteria<FlightMission> {
             return this;
         }
 
-        public Builder setMissionResult(MissionResult missionResult) {
-            this.missionResult = missionResult;
+        public Builder setMissionResult(int id) {
+            this.missionResult = MissionResult.resolveRankById(id);
             return this;
         }
 

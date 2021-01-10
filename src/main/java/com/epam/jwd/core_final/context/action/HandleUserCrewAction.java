@@ -1,16 +1,13 @@
 package com.epam.jwd.core_final.context.action;
 
 import com.epam.jwd.core_final.criteria.CrewMemberCriteria;
-import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
 import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Rank;
 import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.exception.InvalidUserCommandException;
 import com.epam.jwd.core_final.service.CrewService;
-import com.epam.jwd.core_final.service.SpaceshipService;
 import com.epam.jwd.core_final.service.impl.CrewServiceImpl;
-import com.epam.jwd.core_final.service.impl.SpaceshipServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,11 +33,7 @@ public enum HandleUserCrewAction {
         } else {
             System.out.println("Crew member with such data isn't exist");
         }
-
     }
-
-
-
 
     public void availableCrewMember(String[] args) {
         if (args.length == 1) {
@@ -50,7 +43,6 @@ public enum HandleUserCrewAction {
             print(crewService.findAllCrewMembersByCriteria(crewMemberCriteria));
         }
     }
-
 
     private void handleUserCrewMemberChangeAction(CrewMember crewMember) {
         final Scanner scanner = new Scanner(System.in);
@@ -66,6 +58,7 @@ public enum HandleUserCrewAction {
         String[] modifiersAndValues = newData.split(";");
         System.out.println(modifiersAndValues[0]);
         if (modifiersAndValues[0].equals("exit")) {
+            scanner.close();
             return;
         }
         try {
@@ -76,7 +69,9 @@ public enum HandleUserCrewAction {
             System.out.println("-->");
             handleUserCrewMemberChangeAction(crewMember);
         }
+        scanner.close();
         crewService.updateCrewMemberDetails(crewMember);
+        scanner.close();
     }
 
     private void changeData(CrewMember member, String[] modifiersAndValues) throws InvalidUserCommandException {
@@ -138,5 +133,4 @@ public enum HandleUserCrewAction {
         }
         System.out.println("-->");
     }
-
 }

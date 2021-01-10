@@ -22,13 +22,13 @@ import java.util.Properties;
  */
 public final class ApplicationProperties {
 
-    private String inputRootDir;
-    private String outputRootDir;
-    private String crewFileName;
-    private String missionsFileName;
-    private String spaceshipsFileName;
-    private Integer fileRefreshRate;
-    private String dateTimeFormat;
+    private final String inputRootDir;
+    private final String outputRootDir;
+    private final String crewFileName;
+    private final String missionsFileName;
+    private final String spaceshipsFileName;
+    private final Integer fileRefreshRate;
+    private final String dateTimeFormat;
 
     private static ApplicationProperties instance;
     private static Properties properties;
@@ -128,6 +128,5 @@ public final class ApplicationProperties {
         result = 31 * result + (dateTimeFormat != null ? dateTimeFormat.hashCode() : 0);
         return result;
     }
-
     //todo
 }

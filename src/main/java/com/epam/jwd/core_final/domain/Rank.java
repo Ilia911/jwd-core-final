@@ -41,7 +41,6 @@ public enum Rank implements BaseEntity {
         } catch (IndexOutOfBoundsException e) {
             throw new UnknownEntityException("Illegal id!");
         }
-
         return rank;
     }
 }

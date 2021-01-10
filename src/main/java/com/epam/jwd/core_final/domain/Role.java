@@ -33,6 +33,7 @@ public enum Role implements BaseEntity {
 
     /**
      * todo via java.lang.enum methods!
+     *
      * @throws UnknownEntityException if such id does not exist
      */
     public static Role resolveRoleById(int id) {
@@ -44,7 +45,6 @@ public enum Role implements BaseEntity {
         } catch (IndexOutOfBoundsException e) {
             throw new UnknownEntityException("Illegal id!");
         }
-
         return role;
     }
 }

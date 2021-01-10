@@ -1,6 +1,7 @@
 package com.epam.jwd.core_final.context.impl;
 
 import com.epam.jwd.core_final.context.ApplicationContext;
+import com.epam.jwd.core_final.context.hardcore.HardcoreFlightMission;
 import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
@@ -41,7 +42,6 @@ public class NassaContext implements ApplicationContext {
         if (FlightMission.class.equals(tClass)) {
             resultCollection = (Collection<T>) flightMissions;
         }
-
         return resultCollection;
     }
 
@@ -56,15 +56,13 @@ public class NassaContext implements ApplicationContext {
         try {
             crewMembers = CrewMembersReaderUtil.initCrewMembers();
         } catch (InvalidStateException e) {
-           LOGGER.error("Check properties file!" + e.getMessage());
+            LOGGER.error("Check properties file!" + e.getMessage());
         }
         try {
             spaceships = SpaceshipsReaderUtil.initSpaceships();
         } catch (InvalidStateException e) {
             LOGGER.error("Check properties file!" + e.getMessage());
         }
-
+        flightMissions = HardcoreFlightMission.INSTANCE.hardcoreFlightMissions();
     }
-
-
 }

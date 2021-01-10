@@ -5,7 +5,6 @@ import com.epam.jwd.core_final.exception.InvalidStateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Scanner;
 import java.util.function.Supplier;
 
 public interface Application {
@@ -26,7 +25,10 @@ public interface Application {
 
         applicationMenuSupplier.get().greeting();
         applicationMenuSupplier.get().printAvailableOptions();
-        applicationMenuSupplier.get().handleUserInput();
-
+        try {
+            applicationMenuSupplier.get().handleUserInput();
+        } catch (InvalidStateException e) {
+            LOGGER.error("Initialization failed" + e.getMessage());
+        }
     }
 }

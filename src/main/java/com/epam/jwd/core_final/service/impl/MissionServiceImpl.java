@@ -32,20 +32,20 @@ public class MissionServiceImpl implements MissionService {
                 .filter(flightMission -> criteria.getPartName() == null
                         || flightMission.getName().toLowerCase().equals(criteria.getPartName().toLowerCase()))
                 .filter(flightMission -> criteria.getStartDate() == null
-                || flightMission.getStartDate().compareTo(criteria.getStartDate()) >= 0)
+                        || flightMission.getStartDate().compareTo(criteria.getStartDate()) >= 0)
                 .filter(flightMission -> criteria.getEndDate() == null
-                || flightMission.getEndDate().compareTo(criteria.getEndDate()) <= 0)
+                        || flightMission.getEndDate().compareTo(criteria.getEndDate()) <= 0)
                 .filter(flightMission -> criteria.getMinDistance() == null
                         || flightMission.getDistance() >= criteria.getMinDistance())
                 .filter(flightMission -> criteria.getMaxDistance() == null
                         || flightMission.getDistance() <= criteria.getMaxDistance())
                 .filter(flightMission -> criteria.getAssignedSpaceship() == null
-                || flightMission.getAssignedSpaceship().equals(criteria.getAssignedSpaceship()))
+                        || flightMission.getAssignedSpaceship().equals(criteria.getAssignedSpaceship()))
                 .filter(flightMission -> criteria.getAssignedCrew() == null
-                || flightMission.getAssignedCrew().stream()
+                        || flightMission.getAssignedCrew().stream()
                         .anyMatch(crewMember -> crewMember.getId().equals(criteria.getAssignedCrew().getId())))
                 .filter(flightMission -> criteria.getMissionResult() == null
-                || flightMission.getMissionResult().equals(criteria.getMissionResult()))
+                        || flightMission.getMissionResult().equals(criteria.getMissionResult()))
                 .collect(Collectors.toList());
     }
 

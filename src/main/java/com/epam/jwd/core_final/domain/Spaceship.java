@@ -1,6 +1,5 @@
 package com.epam.jwd.core_final.domain;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**

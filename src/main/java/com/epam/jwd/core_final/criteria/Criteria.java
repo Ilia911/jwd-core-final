@@ -10,16 +10,18 @@ public abstract class Criteria<T extends BaseEntity> {
     private Long id;
     private String name;
 
-    public Criteria() {}
+    public Criteria() {
+    }
 
     private Criteria(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId () {
+    public Long getId() {
         return null;
     }
+
     public String getName() {
         return null;
     }
@@ -43,7 +45,7 @@ public abstract class Criteria<T extends BaseEntity> {
         }
 
         public Criteria build() {
-            return  null;
+            return null;
         }
     }
 }
