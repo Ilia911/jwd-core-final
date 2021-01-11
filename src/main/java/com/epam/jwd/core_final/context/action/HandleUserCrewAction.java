@@ -50,14 +50,12 @@ public enum HandleUserCrewAction {
         System.out.println(crewMember);
         System.out.println("Please input new data using crew update modifiers: 'name' (string value), \n'role' (values 1-4), " +
                 "'rank' (values 1-4), 'isReady' (values 'true', 'false') - is ready for next mission.\n" +
-                "'exit' - for exit updating information");
+                "'-exit' - for exit updating information");
         System.out.println("Example: name:Pety Pupkin;role:1;rank:4;isReady:2");
         System.out.println("-->");
         String newData = scanner.nextLine();
-        System.out.println(newData);
         String[] modifiersAndValues = newData.split(";");
-        System.out.println(modifiersAndValues[0]);
-        if (modifiersAndValues[0].equals("exit")) {
+        if (modifiersAndValues[0].equals("-exit")) {
             scanner.close();
             return;
         }
@@ -71,7 +69,6 @@ public enum HandleUserCrewAction {
         }
         scanner.close();
         crewService.updateCrewMemberDetails(crewMember);
-        scanner.close();
     }
 
     private void changeData(CrewMember member, String[] modifiersAndValues) throws InvalidUserCommandException {

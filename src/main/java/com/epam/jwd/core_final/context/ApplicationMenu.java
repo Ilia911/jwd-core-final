@@ -34,7 +34,17 @@ public interface ApplicationMenu {
                 "\t 'status' (values: '1' - CANCELLED, '2' - FAILED, '3' - PLANNED, '4' - IN_PROGRESS, '5' - COMPLETED \n" +
                 "\t Example: -availableMissions minId:1 maxId:5 partName:mission spaceship:1");
         System.out.println("Key: '-updateCrewMember' with all modifiers for crew members");
-        System.out.println("Key: '-outputMission' to store missions in file (modified in application.properties");
+        System.out.println("Key: '-outputMission' to store mission in file (modified in application.properties\n" +
+                "\t You can use one or all modifiers: id, partName, \n" +
+                "\t 'startDate' - format YYYY_mm_dd,  'endDate' - format YYYY_mm_dd, \n" +
+                "\t 'minDistance' - km, 'maxDistance' - km ,'spaceship' - id of the assigned spaceship \n" +
+                "\t 'status' (values: '1' - CANCELLED, '2' - FAILED, '3' - PLANNED, '4' - IN_PROGRESS, '5' - COMPLETED \n" +
+                "\t Example: -availableMissions id:1 partName:mission spaceship:1");
+
+        System.out.println("Key: '-createMission' to create missions \n" +
+                "\t You must write values without modifiers in strict order: name, start date (format YYYY_mm_dd),  " +
+                "end date (format YYYY_mm_dd),  distance (km). \n" +
+                "\t Example: -createMission Frantic 2021_5_12 2021_8_1 234986");
 //          to do:
 //        System.out.println("Key: '-createMission' - for creating mission");
 //        System.out.println("Key: '-changeMission' - to change mission composition");
@@ -73,7 +83,10 @@ public interface ApplicationMenu {
                     handleUserMissionAction.availableFlightMission(commandAndModifiers);
                     break;
                 case "-outputMission":
-                    handleUserMissionAction.outputFlightMission();
+                    handleUserMissionAction.outputFlightMission(commandAndModifiers);
+                    break;
+                case "-createMission":
+                    handleUserMissionAction.createMission(commandAndModifiers);
                     break;
 //                    to do:
 //                case "-changeMission":

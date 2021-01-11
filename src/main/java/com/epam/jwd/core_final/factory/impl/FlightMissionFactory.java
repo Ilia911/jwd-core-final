@@ -25,8 +25,12 @@ public class FlightMissionFactory implements EntityFactory<FlightMission> {
         FlightMission flightMission;
 
         String missionName = (String) args[0];
-        LocalDate startDate = (LocalDate) args[1];
-        LocalDate endDate = (LocalDate) args[2];
+
+        String[] start = ((String) args[1]).split("_");
+        String[] end = ((String) args[2]).split("_");
+
+        LocalDate startDate = LocalDate.of(Integer.parseInt(start[0]), Integer.parseInt(start[1]), Integer.parseInt(start[2]));
+        LocalDate endDate = LocalDate.of(Integer.parseInt(end[0]), Integer.parseInt(end[1]), Integer.parseInt(end[2]));
         Long distance = Long.parseLong((String) args[3]);
 
         flightMission = new FlightMission(missionName, startDate, endDate, distance);

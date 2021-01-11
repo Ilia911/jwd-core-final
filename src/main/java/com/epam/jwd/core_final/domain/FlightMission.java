@@ -32,14 +32,8 @@ public class FlightMission extends AbstractBaseEntity {
         missionResult = MissionResult.PLANNED;
     }
 
-    public FlightMission(String missionName, LocalDate startDate, LocalDate endDate, Long distance,
-                         Spaceship assignedSpaceship, List<CrewMember> assignedCrew) {
-        this.name = missionName;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.distance = distance;
-        this.assignedSpaceship = assignedSpaceship;
-        this.assignedCrew = assignedCrew;
+    public FlightMission() {
+        this.name = "unknown Mission";
     }
 
     public FlightMission(String missionName, LocalDate startDate, LocalDate endDate, Long distance) {
@@ -47,6 +41,14 @@ public class FlightMission extends AbstractBaseEntity {
         this.startDate = startDate;
         this.endDate = endDate;
         this.distance = distance;
+    }
+
+    public FlightMission(String missionName, LocalDate startDate, LocalDate endDate, Long distance, Spaceship spaceship) {
+        this.name = missionName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.distance = distance;
+        this.assignedSpaceship = spaceship;
     }
 
     public void setName(String missionName) {

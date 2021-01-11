@@ -6,6 +6,8 @@ import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.exception.InvalidUserCommandException;
+import com.epam.jwd.core_final.factory.EntityFactory;
+import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
 import com.epam.jwd.core_final.service.MissionService;
 import com.epam.jwd.core_final.service.impl.MissionServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +24,13 @@ public enum HandleUserMissionAction {
     private static final MissionService missionServece = MissionServiceImpl.INSTANCE;
     private static final Logger LOGGER = LoggerFactory.getLogger(HandleUserMissionAction.class);
 
+    public void createMission(String[] args) {
+        final FlightMissionFactory factory = FlightMissionFactory.getInstance();
+        FlightMission mission = factory.create(args[1], args[2], args[3], args[4]);
+        missionServece.addMission(mission);
+        LOGGER.info("Mission successfully created and added in mission list");
+    }
+
     public void availableFlightMission(String[] args) {
         if (args.length == 1) {
             print(missionServece.findAllMissions());
@@ -31,22 +40,32 @@ public enum HandleUserMissionAction {
         }
     }
 
-    public void outputFlightMission() throws InvalidStateException {
-        ApplicationProperties applicationProperties = ApplicationProperties.getInstance();
-        Collection<FlightMission> missions = missionServece.findAllMissions();
+    public void outputFlightMission(String[] args) throws InvalidStateException {
 
+        Collection<FlightMission> mission;
+
+        if (args.length == 1) {
+            System.out.println("Isn't enough information for fetching mission!");
+            return;
+        } else {
+            final FlightMissionCriteria flightMissionCriteria = createFlightMissionCriteria(args);
+            mission = missionServece.findAllMissionsByCriteria(flightMissionCriteria);
+            executeOutputMissions(mission);
+        }
+    }
+
+    private void executeOutputMissions(Collection<? extends BaseEntity> collection) throws InvalidStateException {
+        ApplicationProperties applicationProperties = ApplicationProperties.getInstance();
         String outputFile = applicationProperties.getOutputRootDir();
         outputFile = "src/main/resources/".concat(outputFile).concat("/mission.txt");
 
         ObjectMapper mapper = new ObjectMapper();
 
-            try {
-                mapper.writeValue(new File(outputFile), missions);
-//                mapper.writeValueAsString(missions);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+        try {
+            mapper.writeValue(new File(outputFile), collection);
+        } catch (IOException e) {
+            LOGGER.error("Output stream failed");
+        }
     }
 
     // to do complete this method
@@ -60,6 +79,10 @@ public enum HandleUserMissionAction {
                     builder = builder.setMinId(Long.parseLong(temp[1]));
                     break;
                 case "maxId":
+                    builder = builder.setMaxId(Long.parseLong(temp[1]));
+                    break;
+                case "id":
+                    builder = builder.setMaxId(Long.parseLong(temp[1]));
                     builder = builder.setMaxId(Long.parseLong(temp[1]));
                     break;
                 case "partName":
