@@ -11,6 +11,8 @@ import java.util.Scanner;
 @FunctionalInterface
 public interface ApplicationMenu {
 
+    Scanner APP_SCANNER = new Scanner(System.in);
+
     ApplicationContext getApplicationContext();
 
     default void printAvailableOptions() {
@@ -46,7 +48,7 @@ public interface ApplicationMenu {
 
         System.out.println("Key: '-updateCrewMember' with all modifiers for crew members");
 
-//        System.out.println("Key: '-updateMission' with all modifiers for flight missions");
+        System.out.println("Key: '-updateMission' with id modifier");
 
         System.out.println("Key: '-outputMission' to store mission in file (modified in application.properties\n" +
                 "\t You can use one or all modifiers: id, partName, \n" +
@@ -56,7 +58,6 @@ public interface ApplicationMenu {
                 "\t Example: -availableMissions id:1 partName:mission spaceship:1");
 
 //          to do:
-//        System.out.println("Key: '-createMission' - for creating mission");
 //        System.out.println("Key: '-changeMission' - to change mission composition");
 //        System.out.println("Key: '-addCrewMember' - to add Crew member");
 //        System.out.println("Key: '-addSpaceship' - to add Spaceship");
@@ -64,12 +65,11 @@ public interface ApplicationMenu {
         System.out.println("Divide modifiers and values with ':' ");
         System.out.println("Divide command and modifiers with whitespace ");
         System.out.println("value of the modifier 'partName' without whitespaces!");
-        System.out.println("-->");
     }
 
 
     default void handleUserInput() throws InvalidStateException {
-        final Scanner scanner = new Scanner(System.in);
+
         final HandleUserCrewAction handleUserCrewAction = HandleUserCrewAction.INSTANCE;
         final HandleUserSpaceshipAction handleUserSpaceshipAction = HandleUserSpaceshipAction.INSTANCE;
         final HandleUserMissionAction handleUserMissionAction = HandleUserMissionAction.INSTANCE;
@@ -77,38 +77,37 @@ public interface ApplicationMenu {
         String data;
         String[] commandAndModifiers;
         while (true) {
+            System.out.println("-->");
 
-            if (scanner.hasNext()) {
-                data = scanner.nextLine();
-                commandAndModifiers = data.split(" ");
-                String command = commandAndModifiers[0];
+            data = APP_SCANNER.nextLine();
+            commandAndModifiers = data.split(" ");
+            String command = commandAndModifiers[0];
 
-                switch (command) {
-                    case "-help":
-                        printAvailableOptions();
-                        break;
-                    case "-availableSpaceships":
-                        handleUserSpaceshipAction.availableSpaceship(commandAndModifiers);
-                        break;
-                    case "-availableCrewMembers":
-                        handleUserCrewAction.availableCrewMember(commandAndModifiers);
-                        break;
-                    case "-availableMissions":
-                        handleUserMissionAction.availableFlightMission(commandAndModifiers);
-                        break;
-                    case "-outputMission":
-                        handleUserMissionAction.outputFlightMission(commandAndModifiers);
-                        break;
-                    case "-createMission":
-                        handleUserMissionAction.createMission(commandAndModifiers);
-                        break;
-                    case "-updateSpaceship":
-                        handleUserSpaceshipAction.updateSpaceship(commandAndModifiers);
-                        break;
-//                    to do:
-//                case "-changeMission":
-//
-//                    break;
+            switch (command) {
+                case "-help":
+                    printAvailableOptions();
+                    break;
+                case "-availableSpaceships":
+                    handleUserSpaceshipAction.availableSpaceship(commandAndModifiers);
+                    break;
+                case "-availableCrewMembers":
+                    handleUserCrewAction.availableCrewMember(commandAndModifiers);
+                    break;
+                case "-availableMissions":
+                    handleUserMissionAction.availableFlightMission(commandAndModifiers);
+                    break;
+                case "-outputMission":
+                    handleUserMissionAction.outputFlightMission(commandAndModifiers);
+                    break;
+                case "-createMission":
+                    handleUserMissionAction.createMission(commandAndModifiers);
+                    break;
+                case "-updateSpaceship":
+                    handleUserSpaceshipAction.updateSpaceship(commandAndModifiers);
+                    break;
+                case "-updateMission":
+                    handleUserMissionAction.updateMission(commandAndModifiers);
+                    break;
 //                case "-addCrewMember":
 //
 //                    break;
@@ -118,17 +117,16 @@ public interface ApplicationMenu {
 //                case "-createMission":
 ////
 ////                    break;
-                    case "-updateCrewMember":
-                        handleUserCrewAction.updateCrewMember(commandAndModifiers);
-                        break;
-                    case "-exit":
-                        scanner.close();
-                        return;
-                    default:
-                        System.out.println("Unknown command. Enter '-help' to list available options");
-                        System.out.println("-->");
-                        break;
-                }
+                case "-updateCrewMember":
+                    handleUserCrewAction.updateCrewMember(commandAndModifiers);
+                    break;
+                case "-exit":
+                    APP_SCANNER.close();
+                    return;
+                default:
+                    System.out.println("Unknown command. Enter '-help' to list available options");
+                    System.out.println("-->");
+                    break;
             }
         }
     }

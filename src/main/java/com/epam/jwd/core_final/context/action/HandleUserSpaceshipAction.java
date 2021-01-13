@@ -1,10 +1,7 @@
 package com.epam.jwd.core_final.context.action;
 
-import com.epam.jwd.core_final.criteria.CrewMemberCriteria;
 import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
 import com.epam.jwd.core_final.domain.BaseEntity;
-import com.epam.jwd.core_final.domain.CrewMember;
-import com.epam.jwd.core_final.domain.Rank;
 import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.InvalidUserCommandException;
@@ -17,7 +14,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Scanner;
+
+
+import static com.epam.jwd.core_final.context.ApplicationMenu.APP_SCANNER;
 
 public enum HandleUserSpaceshipAction {
 
@@ -51,7 +50,6 @@ public enum HandleUserSpaceshipAction {
             handleUserSpaceshipChangeAction(optionalSpaceship.get());
         } else {
             System.out.println("Spaceship with such data isn't exist");
-            return;
         }
     }
 
@@ -61,24 +59,17 @@ public enum HandleUserSpaceshipAction {
         System.out.println(spaceship);
         printAvailableOptions();
 
-        Scanner scanner = new Scanner(System.in);
-
-        String newData = scanner.nextLine();
+        String newData = APP_SCANNER.nextLine();
         String[] modifiersAndValues = newData.split(";");
-        if (modifiersAndValues[0].equals("-exit")) {
-            scanner.close();
-            return;
-        }
+
         try {
             changeData(spaceship, modifiersAndValues);
         } catch (InvalidUserCommandException e) {
             LOGGER.error(e.getMessage());
             System.out.println(e.getMessage());
-            System.out.println("-->");
-            handleUserSpaceshipChangeAction(spaceship);
+            System.out.println("Something was wrong!");
         }
         spaceshipService.updateSpaceshipDetails(spaceship);
-        handleUserSpaceshipChangeAction(spaceship);
     }
 
     private void changeData(Spaceship spaceship, String[] modifiersAndValues) throws InvalidUserCommandException {
@@ -116,8 +107,7 @@ public enum HandleUserSpaceshipAction {
     private void printAvailableOptions() {
         System.out.println("Please input new data using spaceship update modifiers: 'name' (string value), " +
                 "\n'distance', 'isReady' (values 'true', 'false') - is ready for next mission.\n" +
-                "'crew' - (values Role-quantity separated by ','\n" +
-                " '-exit' - for exit updating information");
+                "'crew' - (values Role-quantity separated by ','\n");
         System.out.println("Example: name:Blessed;distance:845000;crew:1-5,2-9,3-3,4-3;isReady:1");
         System.out.println("-->");
     }
@@ -160,6 +150,5 @@ public enum HandleUserSpaceshipAction {
         for (BaseEntity baseEntity : collection) {
             System.out.println(baseEntity);
         }
-        System.out.println("-->");
     }
 }

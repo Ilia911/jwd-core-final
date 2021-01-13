@@ -27,8 +27,8 @@ public final class CrewMemberValidator {
     }
 
     private static boolean checkNullObject(String... args) {
-        for (int i = 0; i < 3; i++) {
-            if (args[i] == null) {
+        for (String arg : args) {
+            if (arg == null) {
                 return false;
             }
         }

@@ -15,6 +15,8 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Scanner;
 
+import static com.epam.jwd.core_final.context.ApplicationMenu.APP_SCANNER;
+
 public enum HandleUserCrewAction {
     INSTANCE;
     private static final CrewService crewService = CrewServiceImpl.INSTANCE;
@@ -58,25 +60,20 @@ public enum HandleUserCrewAction {
         System.out.println("You are going to update data of the next crew member:");
         System.out.println(crewMember);
         System.out.println("Please input new data using crew update modifiers: 'name' (string value), \n'role' (values 1-4), " +
-                "'rank' (values 1-4), 'isReady' (values 'true', 'false') - is ready for next mission.\n" +
-                "'-exit' - for exit updating information");
+                "'rank' (values 1-4), 'isReady' (values 'true', 'false') - is ready for next mission.\n");
         System.out.println("Example: name:Pety Pupkin;role:1;rank:4;isReady:2");
         System.out.println("-->");
-        String newData = scanner.nextLine();
+        String newData = APP_SCANNER.nextLine();
         String[] modifiersAndValues = newData.split(";");
-        if (modifiersAndValues[0].equals("-exit")) {
-            scanner.close();
-            return;
-        }
+
         try {
             changeData(crewMember, modifiersAndValues);
         } catch (InvalidUserCommandException e) {
             LOGGER.error(e.getMessage());
             System.out.println(e.getMessage());
-//            System.out.println("-->");
-//            handleUserCrewMemberChangeAction(crewMember);
+            System.out.println("Something was wrong!");
+            System.out.println("-->");
         }
-        scanner.close();
         crewService.updateCrewMemberDetails(crewMember);
     }
 
