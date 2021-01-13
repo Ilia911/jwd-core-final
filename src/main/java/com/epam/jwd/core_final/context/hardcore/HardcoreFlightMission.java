@@ -22,9 +22,9 @@ public enum HardcoreFlightMission {
         Collection<FlightMission> flightMissionCollection = new ArrayList<>();
 
         FlightMission flightMission1 = FlightMissionFactory.getInstance().create("FirstMission",
-                LocalDate.of(2021, 2, 5), LocalDate.of(2021, Month.APRIL, 11), "150000");
+                "2021_01_18", "2021_03_05", "150000");
         FlightMission flightMission2 = FlightMissionFactory.getInstance().create("SecondMission",
-                LocalDate.of(2021, 3, 2), LocalDate.of(2021, Month.MARCH, 15), "230000");
+                "2021_04_12", "2021_08_01", "230000");
 
         flightMissionCollection.addAll(Arrays.asList(flightMission1, flightMission2));
         return flightMissionCollection;

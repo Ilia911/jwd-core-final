@@ -25,8 +25,13 @@ public enum HandleUserCrewAction {
         if (args.length == 1) {
             crewMember = crewService.findAllCrewMembers().stream().findAny();
         } else {
-            final CrewMemberCriteria crewMemberCriteria = createCrewMemberCriteria(args);
-            crewMember = crewService.findCrewMemberByCriteria(crewMemberCriteria);
+            try {
+                final CrewMemberCriteria crewMemberCriteria = createCrewMemberCriteria(args);
+                crewMember = crewService.findCrewMemberByCriteria(crewMemberCriteria);
+            } catch (InvalidUserCommandException e) {
+                System.out.println("Invalid command!");
+                return;
+            }
         }
         if (crewMember.isPresent()) {
             handleUserCrewMemberChangeAction(crewMember.get());
@@ -39,8 +44,12 @@ public enum HandleUserCrewAction {
         if (args.length == 1) {
             print(crewService.findAllCrewMembers());
         } else {
-            final CrewMemberCriteria crewMemberCriteria = createCrewMemberCriteria(args);
-            print(crewService.findAllCrewMembersByCriteria(crewMemberCriteria));
+            try {
+                final CrewMemberCriteria crewMemberCriteria = createCrewMemberCriteria(args);
+                print(crewService.findAllCrewMembersByCriteria(crewMemberCriteria));
+            } catch (InvalidUserCommandException e) {
+                System.out.println("Invalid command!");
+            }
         }
     }
 
@@ -64,8 +73,8 @@ public enum HandleUserCrewAction {
         } catch (InvalidUserCommandException e) {
             LOGGER.error(e.getMessage());
             System.out.println(e.getMessage());
-            System.out.println("-->");
-            handleUserCrewMemberChangeAction(crewMember);
+//            System.out.println("-->");
+//            handleUserCrewMemberChangeAction(crewMember);
         }
         scanner.close();
         crewService.updateCrewMemberDetails(crewMember);
