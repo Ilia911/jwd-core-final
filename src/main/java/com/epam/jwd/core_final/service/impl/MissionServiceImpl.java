@@ -30,7 +30,7 @@ public class MissionServiceImpl implements MissionService {
                 || flightMission.getId() >= criteria.getMinId())
                 .filter(flightMission -> criteria.getMaxId() == null || flightMission.getId() <= criteria.getMaxId())
                 .filter(flightMission -> criteria.getPartName() == null
-                        || flightMission.getName().toLowerCase().equals(criteria.getPartName().toLowerCase()))
+                        || flightMission.getName().toLowerCase().contains(criteria.getPartName().toLowerCase()))
                 .filter(flightMission -> criteria.getStartDate() == null
                         || flightMission.getStartDate().compareTo(criteria.getStartDate()) >= 0)
                 .filter(flightMission -> criteria.getEndDate() == null
@@ -55,7 +55,7 @@ public class MissionServiceImpl implements MissionService {
                 || flightMission.getId() >= criteria.getMinId())
                 .filter(flightMission -> criteria.getMaxId() == null || flightMission.getId() <= criteria.getMaxId())
                 .filter(flightMission -> criteria.getPartName() == null
-                        || flightMission.getName().toLowerCase().equals(criteria.getPartName().toLowerCase()))
+                        || flightMission.getName().toLowerCase().contains(criteria.getPartName().toLowerCase()))
                 .filter(flightMission -> criteria.getStartDate() == null
                         || flightMission.getStartDate().compareTo(criteria.getStartDate()) >= 0)
                 .filter(flightMission -> criteria.getEndDate() == null

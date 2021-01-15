@@ -133,8 +133,6 @@ public enum HandleUserMissionAction {
         System.out.println("Key: 'add' to add crew member");
         System.out.println("Example name:Awesome Mission;startDate:2021_05_28;endDate:2021_12_31;distance:570000;" +
                 "spaceship:13;status:4;add:22;add:43;add48");
-
-
     }
 
     private void executeOutputMissions(Collection<? extends BaseEntity> collection) throws InvalidStateException {
@@ -187,7 +185,7 @@ public enum HandleUserMissionAction {
                     builder = builder.setMissionResult(Integer.parseInt(temp[1]));
                     break;
                 default:
-                    throw new InvalidUserCommandException("Invalid user command. '-help' for list command");
+                    System.out.println("Invalid user modifier. '-help' for list command");
             }
         }
         return builder.build();

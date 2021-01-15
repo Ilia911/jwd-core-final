@@ -35,9 +35,9 @@ public interface ApplicationMenu {
         System.out.println("Key: '-availableMissions' - to see available missions. \n" +
                 "\t You can use one or all modifiers: minId, maxId, partName, \n" +
                 "\t 'startDate' - format YYYY_mm_dd,  'endDate' - format YYYY_mm_dd, \n" +
-                "\t 'minDistance' - km, 'maxDistance' - km ,'spaceship' - id of the assigned spaceship \n" +
+                "\t 'minDistance' - km, 'maxDistance' - km , \n" +
                 "\t 'status' (values: '1' - CANCELLED, '2' - FAILED, '3' - PLANNED, '4' - IN_PROGRESS, '5' - COMPLETED \n" +
-                "\t Example: -availableMissions minId:1 maxId:5 partName:mission spaceship:1");
+                "\t Example: -availableMissions minId:1 maxId:5 partName:mission");
 
         System.out.println("Key: '-createMission' to create missions \n" +
                 "\t You must write values without modifiers in strict order: name, start date (format YYYY_mm_dd),  " +
@@ -53,20 +53,14 @@ public interface ApplicationMenu {
         System.out.println("Key: '-outputMission' to store mission in file (modified in application.properties\n" +
                 "\t You can use one or all modifiers: id, partName, \n" +
                 "\t 'startDate' - format YYYY_mm_dd,  'endDate' - format YYYY_mm_dd, \n" +
-                "\t 'minDistance' - km, 'maxDistance' - km ,'spaceship' - id of the assigned spaceship \n" +
+                "\t 'minDistance' - km, 'maxDistance' - km , \n" +
                 "\t 'status' (values: '1' - CANCELLED, '2' - FAILED, '3' - PLANNED, '4' - IN_PROGRESS, '5' - COMPLETED \n" +
-                "\t Example: -availableMissions id:1 partName:mission spaceship:1");
-
-//          to do:
-//        System.out.println("Key: '-changeMission' - to change mission composition");
-//        System.out.println("Key: '-addCrewMember' - to add Crew member");
-//        System.out.println("Key: '-addSpaceship' - to add Spaceship");
+                "\t Example: -outputMission id:1 partName:mission");
         System.out.println("Key: '-exit' - to close the application");
         System.out.println("Divide modifiers and values with ':' ");
         System.out.println("Divide command and modifiers with whitespace ");
         System.out.println("value of the modifier 'partName' without whitespaces!");
     }
-
 
     default void handleUserInput() throws InvalidStateException {
 
@@ -108,15 +102,6 @@ public interface ApplicationMenu {
                 case "-updateMission":
                     handleUserMissionAction.updateMission(commandAndModifiers);
                     break;
-//                case "-addCrewMember":
-//
-//                    break;
-//                case "-addSpaceship":
-//
-//                    break;
-//                case "-createMission":
-////
-////                    break;
                 case "-updateCrewMember":
                     handleUserCrewAction.updateCrewMember(commandAndModifiers);
                     break;
