@@ -26,3 +26,4 @@ Able to write information about selected mission(s) in output file in json forma
 * Create tests using Junit, Mockito for your functionality
 * Implement additional option in a menu (for mission) with real-time flight-status
 * Discuss with mentor any improvements, you want to implement 
+add one line
