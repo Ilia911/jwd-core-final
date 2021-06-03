@@ -27,3 +27,4 @@ Able to write information about selected mission(s) in output file in json forma
 * Implement additional option in a menu (for mission) with real-time flight-status
 * Discuss with mentor any improvements, you want to implement 
 add one line
+add another line
